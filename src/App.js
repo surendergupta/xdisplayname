@@ -66,10 +66,7 @@ function App() {
         </div>
         <button type='submit'>Submit</button>
       </form>
-
-      <div id='display'>
-        {fullName ? `Full Name: ${fullName}` : ''}
-      </div>
+      {fullName ? `Full Name: ${fullName}` : ''}
     </div>
   );
 }
