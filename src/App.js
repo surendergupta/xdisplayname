@@ -4,15 +4,34 @@ import './App.css';
 function App() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [fullName, setFullName] = useState('');
+
+  const changeInputFirstName = (e) => {
+    let fname = e.target.value.trim();
+    if(fname === '') {
+      setFirstName('');
+      setFullName('');
+    }
+    setFirstName(fname);
+  }
+  
+  const changeInputLastName = (e) => {
+    let lname = e.target.value.trim();
+    if(lname === '') {
+      setLastName('');
+      setFullName('');
+    }
+    setLastName(lname);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(firstName.trim() && lastName.trim() && firstName.length > 0 && lastName.length > 0) {
-      document.getElementById('display').innerHTML = `Full Name: ${firstName} ${lastName}`;
+    if(firstName && lastName) {
+      setFullName(`${firstName} ${lastName}`);
     }
     else
     {
-      document.getElementById('display').innerHTML = ``;
+      setFullName('');
     }
   }
   return (
@@ -25,7 +44,7 @@ function App() {
             <input 
               className='' 
               type="text" 
-              onChange={(e) => setFirstName(e.target.value)} 
+              onChange={changeInputFirstName} 
               value={firstName} 
               placeholder='Enter first name' 
               required={true} 
@@ -38,7 +57,7 @@ function App() {
             <input 
               className=''  
               type="text" 
-              onChange={(e) => setLastName(e.target.value)} 
+              onChange={changeInputLastName} 
               value={lastName} 
               placeholder='Enter last name' 
               required={true} 
@@ -48,7 +67,9 @@ function App() {
         <button type='submit'>Submit</button>
       </form>
 
-      <div id='display'></div>
+      <div id='display'>
+        {fullName ? `Full Name: ${fullName}` : ''}
+      </div>
     </div>
   );
 }
